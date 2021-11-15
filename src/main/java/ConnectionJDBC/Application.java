@@ -4,48 +4,24 @@
 package ConnectionJDBC;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+
+import Connection.ConnectionFactory;
 
 public class Application {
   
   public static void main(String [] args){
 	 
-	  String urlConnection = "jdbc:mysql://localhost:3306/dio";
-	
-	 try {
-		 Connection conn = DriverManager.getConnection(urlConnection, "root", null);
-		System.out.println("Sucesso " + " - " + conn);
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		System.out.println("falha");	
+	  Connection conn = null;
+	try {
+		conn = ConnectionFactory.getConnection();
+		if(conn != null) {
+			System.out.println("Sucesso");
+		}
+	} catch (ClassNotFoundException e1) {
+		System.out.println("Falha");
+		e1.printStackTrace();
 	}
-	 
-	System.out.println("--------------------------------------------"); 
-	
-	/*
-	 * definido paramentros para conexão com o BD, desta forma caso mude o BD,
-	 * fica mais facil uma mantenção; 
-	 */
-	 String driver = "mysql";
-	 String dataBaseAdress = "localhost";
-	 String dataBaseName = "dio";
-	 String user = "root";
-	 String password = "";
-	 
-	 StringBuilder sb = new StringBuilder("jdbc:")
-			 .append(driver).append("://")
-			 .append(dataBaseAdress).append("/")
-			 .append(dataBaseName);
-	 String connectionUrl = sb.toString();
-	 
-	 try {
-		Connection conn = DriverManager.getConnection(connectionUrl, user, password);
-		System.out.println("Sucesso ao conectar com banco MySql");
-	} catch (Exception e) {
-		System.out.println("Falha ao conectar com banco MySql");
-	}
+	  
 	  
   }
 
