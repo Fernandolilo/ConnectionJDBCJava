@@ -15,13 +15,37 @@ public class Application {
 	
 	 try {
 		 Connection conn = DriverManager.getConnection(urlConnection, "root", null);
-		System.out.println("Sucesso");
+		System.out.println("Sucesso " + " - " + conn);
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 		System.out.println("falha");	
 	}
 	 
+	System.out.println("--------------------------------------------"); 
+	
+	/*
+	 * definido paramentros para conexão com o BD, desta forma caso mude o BD,
+	 * fica mais facil uma mantenção; 
+	 */
+	 String driver = "mysql";
+	 String dataBaseAdress = "localhost";
+	 String dataBaseName = "dio";
+	 String user = "root";
+	 String password = "";
+	 
+	 StringBuilder sb = new StringBuilder("jdbc:")
+			 .append(driver).append("://")
+			 .append(dataBaseAdress).append("/")
+			 .append(dataBaseName);
+	 String connectionUrl = sb.toString();
+	 
+	 try {
+		Connection conn = DriverManager.getConnection(connectionUrl, user, password);
+		System.out.println("Sucesso ao conectar com banco MySql");
+	} catch (Exception e) {
+		System.out.println("Falha ao conectar com banco MySql");
+	}
 	  
   }
 
