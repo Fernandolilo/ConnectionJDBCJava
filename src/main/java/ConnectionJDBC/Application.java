@@ -11,21 +11,15 @@ public class Application {
   
   public static void main(String [] args){
 	 
-	 Connection conn = null;
+	  String urlConnection = "jdbc:mysql://localhost:3306/dio";
+	
 	 try {
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dio", "root", null);
+		 Connection conn = DriverManager.getConnection(urlConnection, "root", null);
 		System.out.println("Sucesso");
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-		System.out.println("falha");
-	}finally {
-		try {
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println("falha");	
 	}
 	 
 	  
