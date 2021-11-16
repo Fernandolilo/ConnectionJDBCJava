@@ -15,7 +15,11 @@ public static void main(String [] args) throws ClassNotFoundException{
 	 
 	
 	AlunoDAO dao = new AlunoDAO();	
-	System.out.println(dao.selectAluno().toString());	
+	System.out.println(dao.findAll().toString());	
+	
+	System.out.println("----------------------------------");
+	
+	System.out.println(dao.findById(3));
   }
 
 }

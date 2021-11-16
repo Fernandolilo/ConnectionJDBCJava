@@ -14,7 +14,7 @@ import domain.Aluno;
 
 public class AlunoDAO {	
 	 
-	 public List<Aluno> selectAluno() throws ClassNotFoundException {
+	 public List<Aluno> findAll() throws ClassNotFoundException {
 		 Connection conn = ConnectionFactory.getConnection();
 	     PreparedStatement stmt = null;
 	     ResultSet rs = null;
@@ -40,6 +40,32 @@ public class AlunoDAO {
 	      ConnectionFactory.closeConnection(conn, stmt, rs);
 	     }
 		 return alunos;
+	 }
+	 public Aluno findById(Integer id) throws ClassNotFoundException {
+		 Connection conn = ConnectionFactory.getConnection();
+	     PreparedStatement stmt = null;
+	     ResultSet rs = null;
+	     Aluno aluno = new Aluno();
+		 
+		 try {
+			 stmt = conn.prepareStatement("SELECT * FROM aluno WHERE id = ?");
+			 stmt.setInt(1, id);
+			 rs = stmt.executeQuery();
+			 
+			if(rs.next()) {				 
+				 aluno.setId(rs.getInt("id"));
+				 aluno.setNome(rs.getString("nome"));
+				 aluno.setIdade(rs.getInt("idade"));
+				 aluno.setEstado(rs.getString("estado"));				
+				 
+			 }
+		 } catch (SQLException ex) {
+	         Logger.getLogger(AlunoDAO.class.getName()).log(Level.SEVERE, null, ex);
+	     }
+	     finally{
+	      ConnectionFactory.closeConnection(conn, stmt, rs);
+	     }
+		 return aluno;
 	 }
 	 	
 }
