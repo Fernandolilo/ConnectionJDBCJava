@@ -3,26 +3,19 @@
  */
 package ConnectionJDBC;
 
-import java.sql.Connection;
-
-import Connection.ConnectionFactory;
+import DAO.AlunoDAO;
 
 public class Application {
   
-  public static void main(String [] args){
+ 
+
+
+
+public static void main(String [] args) throws ClassNotFoundException{
 	 
-	  Connection conn = null;
-	try {
-		conn = ConnectionFactory.getConnection();
-		if(conn != null) {
-			System.out.println("Sucesso");
-		}
-	} catch (ClassNotFoundException e1) {
-		System.out.println("Falha");
-		e1.printStackTrace();
-	}
-	  
-	  
+	
+	AlunoDAO dao = new AlunoDAO();	
+	System.out.println(dao.selectAluno().toString());	
   }
 
 }
