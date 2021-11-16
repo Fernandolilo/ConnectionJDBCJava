@@ -16,7 +16,7 @@ public static void main(String [] args) throws ClassNotFoundException{
 	 
 	
 	AlunoDAO dao = new AlunoDAO();	
-	Aluno aluno = new Aluno();
+	/*
 	System.out.println("Seleciona todos os Alunos");
 	System.out.println(dao.findAll().toString());	
 	
@@ -28,11 +28,30 @@ public static void main(String [] args) throws ClassNotFoundException{
 	System.out.println("Deletar Alunos por ID ");	
 	
 
-	if(dao.findById(4) != null) {
-		dao.delete(4);
-	}
+	System.out.println("----------------------------------");
+	dao.delete(2);
+	dao.findAll().forEach(System.out::println);
 			
-	System.out.println(dao.findAll().toString());	
+	System.out.println("----------------------------------");
+	System.out.println("Inserindo um Aluno: ");
+	
+	Aluno al = new Aluno();
+	al.setNome("Fernando Davi");
+	al.setIdade(50);
+	al.setEstado("PE");
+	dao.create(al);
+	dao.findAll().forEach(System.out::println);
+	*/
+	System.out.println("----------------------------------");
+
+	Aluno alun = dao.findById(3);
+	System.out.println(dao.findById(3));
+	System.out.println("----------------------------------");
+	alun.setNome("Fernand");
+	alun.setIdade(50);
+	alun.setEstado("PE");
+	dao.update(alun);
+	dao.findAll().forEach(System.out::println);
   }
 
 }

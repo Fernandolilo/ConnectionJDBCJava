@@ -68,7 +68,7 @@ public class AlunoDAO {
 	     }
 		 return aluno;
 	 }
-	 
+	
 	 public void delete(Integer id) throws ClassNotFoundException {
 		 
 		  Connection conn = ConnectionFactory.getConnection();
@@ -88,6 +88,45 @@ public class AlunoDAO {
 			 ConnectionFactory.closeConnection(conn, stmt);
 		}
 	 }
-	 	
+	 
+	 public void create (Aluno aluno) throws ClassNotFoundException {
+		 Connection conn = ConnectionFactory.getConnection();
+         PreparedStatement stmt = null;
+         try {
+        	 stmt = conn.prepareStatement("INSERT INTO aluno (nome, idade, estado) VALUES (?, ? ,?)");
+        	 stmt.setString(1, aluno.getNome());
+        	 stmt.setInt(2, aluno.getIdade());
+        	 stmt.setString(3, aluno.getEstado());
+        	 stmt.executeUpdate();
+        	 System.out.println("Inserido com sucesso! ");
+         }catch(SQLException e) {
+        	 System.out.println("Faha na inserção");
+         }
+         finally {
+        	 ConnectionFactory.closeConnection(conn, stmt);
+         }
+	 }
+
+	 public void update(Aluno aluno) throws ClassNotFoundException {
+		 Connection conn = ConnectionFactory.getConnection();
+         PreparedStatement stmt = null;
+         try {
+        	 stmt = conn.prepareStatement("UPDATE `aluno` SET `nome` = ?, `idade` = ?, `estado` = ? WHERE `aluno`.`id` = ?");
+        	 stmt.setString(1, aluno.getNome());
+        	 stmt.setInt(2, aluno.getIdade());
+        	 stmt.setString(3, aluno.getEstado());
+        	 stmt.setInt(4, aluno.getId());
+        	 
+        	 stmt.executeUpdate();
+        	 
+        	 System.out.println("Atualizado com sucesso! ");
+         }catch(SQLException e) {
+        	 System.out.println("Faha na atualização");
+         }
+         finally {
+        	 ConnectionFactory.closeConnection(conn, stmt);
+         }
+	 }
+		 	
 }
 
