@@ -41,6 +41,7 @@ public class AlunoDAO {
 	     }
 		 return alunos;
 	 }
+	 
 	 public Aluno findById(Integer id) throws ClassNotFoundException {
 		 Connection conn = ConnectionFactory.getConnection();
 	     PreparedStatement stmt = null;
@@ -66,6 +67,26 @@ public class AlunoDAO {
 	      ConnectionFactory.closeConnection(conn, stmt, rs);
 	     }
 		 return aluno;
+	 }
+	 
+	 public void delete(Integer id) throws ClassNotFoundException {
+		 
+		  Connection conn = ConnectionFactory.getConnection();
+          PreparedStatement stmt = null;
+        
+		 try {
+			 stmt = conn.prepareStatement("DELETE FROM aluno  WHERE id = ?");
+			 stmt.setInt(1, id);			 
+			 stmt.executeUpdate();
+			 System.out.println("Deletado com sucesso");
+		 
+			 			
+		 }catch(SQLException e) {
+			 System.out.println("Erro ao deletar" + e.getErrorCode());
+		 }
+		 finally {
+			 ConnectionFactory.closeConnection(conn, stmt);
+		}
 	 }
 	 	
 }

@@ -4,6 +4,7 @@
 package ConnectionJDBC;
 
 import DAO.AlunoDAO;
+import domain.Aluno;
 
 public class Application {
   
@@ -15,11 +16,23 @@ public static void main(String [] args) throws ClassNotFoundException{
 	 
 	
 	AlunoDAO dao = new AlunoDAO();	
+	Aluno aluno = new Aluno();
+	System.out.println("Seleciona todos os Alunos");
 	System.out.println(dao.findAll().toString());	
 	
 	System.out.println("----------------------------------");
-	
+	System.out.println("Seleciona Alunos por ID ");
 	System.out.println(dao.findById(3));
+	
+	System.out.println("----------------------------------");
+	System.out.println("Deletar Alunos por ID ");	
+	
+
+	if(dao.findById(4) != null) {
+		dao.delete(4);
+	}
+			
+	System.out.println(dao.findAll().toString());	
   }
 
 }
